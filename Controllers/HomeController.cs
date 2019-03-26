@@ -46,16 +46,20 @@ namespace Rino.Controllers
                 db.software.AddRange(lista);
                 db.SaveChanges();
 
-                /*  var mostrar = db.software.ToList();
-
-
-                 foreach (software item in mostrar)
-                 {
-                     ViewData["ab"] = item.precio;
-                 } */
 
             }
 
+
+            return View();
+        }
+
+        public IActionResult mostrar()
+        {
+            using (var db = new LinqContext())
+            {
+                var mostrar = db.software.OrderByDescending(x => x.nombre).ThenBy(x => x.os).ToList();
+                ViewData["programa"] = mostrar;
+            }
 
             return View();
         }
