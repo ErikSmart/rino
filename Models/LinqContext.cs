@@ -9,7 +9,7 @@ namespace Rino.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=172.17.0.2;Database=rino;User Id=SA;Password=<YourNewStrong!Passw0rd>;");
+            optionsBuilder.UseSqlServer(@"Server=172.17.0.1;Database=rino;User Id=SA;Password=<YourNewStrong!Passw0rd>;");
         }
         public DbSet<Rino.Models.software> software { get; set; }
     }

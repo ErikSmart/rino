@@ -57,8 +57,24 @@ namespace Rino.Controllers
         {
             using (var db = new LinqContext())
             {
-                var mostrar = db.software.OrderByDescending(x => x.nombre).ThenBy(x => x.os).ToList();
-                ViewData["programa"] = mostrar;
+                // Sacando todos los datos
+                var mostrarTodos = db.software.OrderByDescending(x => x.nombre).ThenBy(x => x.os).ToList();
+                ViewData["programa"] = mostrarTodos;
+                // Sacando solo un dato
+                var soloUno = db.software.Where(x => x.nombre.StartsWith("ñ"));
+
+                if (soloUno != null)
+                {
+                    ViewData["individual"] = "No hay valor encontrado";
+                    if (true)
+                    {
+                        foreach (var item in soloUno)
+                        {
+                            ViewData["individual"] = item.nombre;
+                        }
+                    }
+                }
+
             }
 
             return View();
