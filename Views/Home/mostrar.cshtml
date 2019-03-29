@@ -1,5 +1,5 @@
 @model IEnumerable<Rino.Models.software>
-
+@using Microsoft.AspNetCore.Http;
   <!DOCTYPE html>
   <html>
 
@@ -36,7 +36,28 @@
           </table>
         </div>
       </div>
-     @ViewData["individual"].ToString()     
+     @ViewData["individual"].ToString()
+    <hr>
+    <br>
+     @ViewData["total"]  
+     <hr>
+     <br>
+     
+        @ViewData["selecionar"]
+     @{
+       var dinamico =@ViewData["numeros"];
+       dinamico = 2;
+      }
+
+      @{
+        ViewBag.numeros = 3;
+      }
+     
+     <hr>
+     <br>
+     @dinamico
+      @ViewBag.numeros;
+    
     </div>
   </body>
 

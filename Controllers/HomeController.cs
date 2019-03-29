@@ -14,6 +14,7 @@ namespace Rino.Controllers
 {
     public class HomeController : Controller
     {
+        public readonly SoftwareContext _context;
         public IActionResult Index()
         {
 
@@ -53,15 +54,17 @@ namespace Rino.Controllers
             return View();
         }
 
-        public IActionResult mostrar()
+        public IActionResult mostrar(int? numeros)
         {
+
             using (var db = new LinqContext())
             {
                 // Sacando todos los datos
                 var mostrarTodos = db.software.OrderByDescending(x => x.nombre).ThenBy(x => x.os).ToList();
+
                 ViewData["programa"] = mostrarTodos;
                 // Sacando solo un dato
-                var soloUno = db.software.Where(x => x.nombre.StartsWith("ñ"));
+                var soloUno = db.software.Where(x => x.nombre.StartsWith("a"));
 
                 if (soloUno != null)
                 {
@@ -74,10 +77,29 @@ namespace Rino.Controllers
                         }
                     }
                 }
+                // Selector de la base de datos
+                numeros = 1;
+                ViewData["numeros"] = numeros;
+
+                var selecionar = db.software.Select(x => new identidades { precio = x.precio, nombre = x.nombre }).FromSql("select nombre, precio from software where id={0}", numeros).ToList();
+                // Suma de una columna
+                var total = db.software.Select(x => x.precio).Sum();
+                foreach (var item in selecionar.ToList())
+                {
+                    ViewData["selecionar"] = item.nombre + item.precio;
+                }
+
+                ViewData["total"] = total;
+
 
             }
 
             return View();
+        }
+        class identidades
+        {
+            public double precio { get; set; }
+            public string nombre { get; set; }
         }
 
         public IActionResult Privacy()
