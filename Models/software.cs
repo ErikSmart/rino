@@ -13,4 +13,14 @@ namespace Rino.Models
         [Column(TypeName = "money")]
         public double precio { get; set; }
     }
+
+    public class alumnos
+    {
+        public int id { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string estudiante { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime fecha { get; set; }
+    }
 }

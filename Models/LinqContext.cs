@@ -12,5 +12,6 @@ namespace Rino.Models
             optionsBuilder.UseSqlServer(@"Server=172.17.0.1;Database=rino;User Id=SA;Password=<YourNewStrong!Passw0rd>;");
         }
         public DbSet<Rino.Models.software> software { get; set; }
+        public DbSet<Rino.Models.alumnos> alumnos { get; set; }
     }
 }

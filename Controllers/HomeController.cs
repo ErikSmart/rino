@@ -17,6 +17,15 @@ namespace Rino.Controllers
         public readonly SoftwareContext _context;
         public IActionResult Index()
         {
+            using (var db = new LinqContext())
+            {
+                var mostrar = db.software.Where(x => x.nombre == "Atom");
+                foreach (var item in mostrar.ToList())
+                {
+                    ViewData["mostar"] = item.nombre;
+                }
+
+            }
 
             return View();
         }
@@ -29,6 +38,28 @@ namespace Rino.Controllers
                 var sistemax = new software();
                 var sistemax2 = new software();
                 var sietmeax3 = new software();
+
+                var alumno = new alumnos();
+                var alumno1 = new alumnos();
+                var alumno3 = new alumnos();
+                var alumno2 = new alumnos();
+
+
+
+
+                alumno.estudiante = "Guillermo Topete";
+                alumno.fecha = new DateTime(1998, 05, 10);
+
+
+                alumno1.estudiante = "Albertana Solis";
+                alumno1.fecha = new DateTime(2001, 03, 02);
+
+                alumno3.estudiante = "Justina Sanchez";
+                alumno3.fecha = new DateTime(1999, 02, 21);
+
+                alumno2.estudiante = "Celia Kali";
+                alumno2.fecha = DateTime.Now;
+
 
                 sistemax.os = "Linux";
                 sistemax.nombre = "Atom";
@@ -43,8 +74,10 @@ namespace Rino.Controllers
                 sietmeax3.precio = 100;
 
                 var lista = new List<software>() { sistemax, sistemax2, sietmeax3 };
+                var listaAlumnos = new List<alumnos>() { alumno, alumno1, alumno2, alumno3 };
 
                 db.software.AddRange(lista);
+                db.alumnos.AddRange(listaAlumnos);
                 db.SaveChanges();
 
 
@@ -93,6 +126,7 @@ namespace Rino.Controllers
 
 
             }
+
 
             return View();
         }
