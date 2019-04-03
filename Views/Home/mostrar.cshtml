@@ -1,4 +1,5 @@
 @model IEnumerable<Rino.Models.software>
+
 @using Microsoft.AspNetCore.Http;
   <!DOCTYPE html>
   <html>
@@ -60,6 +61,12 @@
     
     </div>
     @ViewData["fecha"]
+@foreach (var itemi in ViewData["alumni"] as IList<alumnos>)
+{
+    @itemi.estudiante
+}
+    
+   alumni  
   </body>
 
   </html>

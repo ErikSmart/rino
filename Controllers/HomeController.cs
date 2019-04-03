@@ -122,6 +122,16 @@ namespace Rino.Controllers
                     ViewData["selecionar"] = item.nombre + item.precio;
                 }
 
+                var alumnos = db.alumnos.Where(x => x.fecha >= DateTime.Today.AddYears(-19)).ToList();
+
+                ViewData["alumni"] = alumnos;
+                /* foreach (var itemi in alumnos.ToList())
+                {
+                    ViewData["alumni"] = itemi.estudiante;
+
+                } */
+
+
                 ViewData["total"] = total;
 
 
