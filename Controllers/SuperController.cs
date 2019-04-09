@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Rino.Models;
 
 namespace Rino.Controllers
@@ -25,6 +26,23 @@ namespace Rino.Controllers
                 buscar.estudiante += " Abascal";
                 db.SaveChanges();
 
+            }
+            return View();
+        }
+
+        public IActionResult borrar()
+        {
+            var id = 3;
+            using (var db = new LinqContext())
+            {
+                db.alumnos.Select(x => x.id == id).FirstOrDefault();
+            }
+            using (var dba = new LinqContext())
+            {
+                var estudiante = new alumnos();
+                estudiante.id = id;
+                dba.Entry(estudiante).State = EntityState.Deleted;
+                dba.SaveChanges();
             }
             return View();
         }
